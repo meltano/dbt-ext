@@ -1,2 +1,3 @@
-# basic-python-template
-A github repo template for generic Meltano python projects
+# dbt-ext
+
+Meltano dbt utility extension
