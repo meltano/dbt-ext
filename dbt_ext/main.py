@@ -6,10 +6,10 @@ from typing import List
 
 import structlog
 import typer
-
-from dbt_ext.extension import dbt
 from meltano.edk.extension import DescribeFormat
 from meltano.edk.logging import default_logging_config, parse_log_level
+
+from dbt_ext.extension import dbt
 
 APP_NAME = "dbt"
 
@@ -83,9 +83,10 @@ def main(
         False, "--log-levels", envvar="LOG_LEVELS", help="Show log levels"
     ),
     meltano_log_json: bool = typer.Option(
-        False, "--meltano-log-json",
+        False,
+        "--meltano-log-json",
         envvar="MELTANO_LOG_JSON",
-        help="Log in the meltano JSON log format"
+        help="Log in the meltano JSON log format",
     ),
 ) -> None:
     """Simple Meltano extension that wraps the dbt CLI."""
@@ -93,5 +94,5 @@ def main(
         level=parse_log_level(log_level),
         timestamps=log_timestamps,
         levels=log_levels,
-        json_format=meltano_log_json
+        json_format=meltano_log_json,
     )
