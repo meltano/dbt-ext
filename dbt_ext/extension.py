@@ -28,7 +28,11 @@ class dbt(ExtensionBase):
         """Initialize the extension."""
         self.dbt_bin = "dbt"  # verify this is the correct name
         self.dbt_invoker = Invoker(self.dbt_bin)
-        self.dbt_type = os.getenv("DBT_TYPE", "postgres")
+        self.dbt_type = os.getenv("DBT_EXT_TYPE", None)
+        if not self.dbt_type:
+            raise Exception("DBT_EXT_TYPE must be set")
+        self.dbt_project_dir = Path(os.getenv("DBT_EXT_PROJECT_DIR", "transform"))
+        self.dbt_profiles_dir = Path(os.getenv("DBT_EXT_PROFILES_DIR", None))
 
     def invoke(self, command_name: str | None, *command_args: Any) -> None:
         """Invoke the underlying cli, that is being wrapped by this extension.
@@ -67,33 +71,31 @@ class dbt(ExtensionBase):
         Args:
             force: Whether to force initialization.
         """
-        dbt_transform_dir = Path(os.environ["MELTANO_PROJECT_ROOT"]) / "transform"
-        if not dbt_transform_dir.exists():
-            log.info("creating dbt transform directory", path=dbt_transform_dir)
-            dbt_transform_dir.mkdir(parents=True, exist_ok=True)
+        if not self.dbt_project_dir.exists():
+            log.info("creating dbt project directory", path=self.dbt_project_dir)
+            self.dbt_project_dir.mkdir(parents=True, exist_ok=True)
 
         for entry in ir_files("files_dbt_ext.bundle.transform").iterdir():
             if entry.name == "__pycache__":
                 continue
-            log.debug(f"deploying {entry.name}", entry=entry, dst=dbt_transform_dir)
+            log.debug(f"deploying {entry.name}", entry=entry, dst=self.dbt_project_dir)
             if entry.is_file():
-                shutil.copy(entry, dbt_transform_dir / entry.name)
+                shutil.copy(entry, self.dbt_project_dir / entry.name)
             else:
                 shutil.copytree(
-                    entry, dbt_transform_dir / entry.name, dirs_exist_ok=True
+                    entry, self.dbt_project_dir / entry.name, dirs_exist_ok=True
                 )
 
-        profiles_dir = dbt_transform_dir / "profiles"
-        if not profiles_dir.exists():
-            log.info("creating dbt profiles directory", path=profiles_dir)
-            profiles_dir.mkdir(parents=True, exist_ok=True)
+        if not self.dbt_profiles_dir.exists():
+            log.info("creating dbt profiles directory", path=self.dbt_profiles_dir)
+            self.dbt_profiles_dir.mkdir(parents=True, exist_ok=True)
 
         for entry in ir_files("files_dbt_ext.profiles").iterdir():
             if entry.name == self.dbt_type and entry.is_dir():
                 log.debug(
-                    f"deploying {entry.name} profile", entry=entry, dst=profiles_dir
+                    f"deploying {entry.name} profile", entry=entry, dst=self.dbt_profiles_dir
                 )
-                shutil.copytree(entry, profiles_dir / entry.name, dirs_exist_ok=True)
+                shutil.copytree(entry, self.dbt_profiles_dir, dirs_exist_ok=True)
                 break
         else:
             log.error(f"dbt type {self.dbt_type} had no matching profile.")
@@ -101,6 +103,6 @@ class dbt(ExtensionBase):
         log.info(
             "dbt initialized",
             dbt_type=self.dbt_type,
-            dbt_transform_dir=dbt_transform_dir,
-            profiles_dir=profiles_dir,
+            dbt_project_dir=self.dbt_project_dir,
+            dbt_profiles_dir=self.dbt_profiles_dir,
         )
