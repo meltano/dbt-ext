@@ -26,13 +26,15 @@ class dbt(ExtensionBase):
 
     def __init__(self) -> None:
         """Initialize the extension."""
-        self.dbt_bin = "dbt"  # verify this is the correct name
-        self.dbt_invoker = Invoker(self.dbt_bin)
-        self.dbt_type = os.getenv("DBT_EXT_TYPE", None)
-        if not self.dbt_type:
+        self.dbt_bin = "dbt"
+        self.dbt_ext_type = os.getenv("DBT_EXT_TYPE", None)
+        if not self.dbt_ext_type:
             raise Exception("DBT_EXT_TYPE must be set")
         self.dbt_project_dir = Path(os.getenv("DBT_EXT_PROJECT_DIR", "transform"))
-        self.dbt_profiles_dir = Path(os.getenv("DBT_EXT_PROFILES_DIR", None))
+        self.dbt_profiles_dir = Path(
+            os.getenv("DBT_EXT_PROFILES_DIR", self.dbt_project_dir / "transform")
+        )
+        self.dbt_invoker = Invoker(self.dbt_bin, cwd=self.dbt_project_dir)
 
     def invoke(self, command_name: str | None, *command_args: Any) -> None:
         """Invoke the underlying cli, that is being wrapped by this extension.
@@ -91,18 +93,20 @@ class dbt(ExtensionBase):
             self.dbt_profiles_dir.mkdir(parents=True, exist_ok=True)
 
         for entry in ir_files("files_dbt_ext.profiles").iterdir():
-            if entry.name == self.dbt_type and entry.is_dir():
+            if entry.name == self.dbt_ext_type and entry.is_dir():
                 log.debug(
-                    f"deploying {entry.name} profile", entry=entry, dst=self.dbt_profiles_dir
+                    f"deploying {entry.name} profile",
+                    entry=entry,
+                    dst=self.dbt_profiles_dir,
                 )
                 shutil.copytree(entry, self.dbt_profiles_dir, dirs_exist_ok=True)
                 break
         else:
-            log.error(f"dbt type {self.dbt_type} had no matching profile.")
+            log.error(f"dbt type {self.dbt_ext_type} had no matching profile.")
 
         log.info(
             "dbt initialized",
-            dbt_type=self.dbt_type,
+            dbt_ext_type=self.dbt_ext_type,
             dbt_project_dir=self.dbt_project_dir,
             dbt_profiles_dir=self.dbt_profiles_dir,
         )
