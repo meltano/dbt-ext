@@ -14,7 +14,7 @@ plugins:
       label: dbt PostgreSQL extension
       executable: dbt_invoker
       namespace: dbt_ext
-      pip_url: dbt-core~=1.1.0 dbt-postgres~=1.1.0 git+https://github.com/meltano/git-ext.git@feat/working-dbt-ext
+      pip_url: dbt-core~=1.1.0 dbt-postgres~=1.1.0 git+https://github.com/meltano/dbtt-ext.git@feat/working-dbt-ext
       settings:
       - name: ext_type
         env: DBT_EXT_TYPE
