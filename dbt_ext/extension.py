@@ -36,6 +36,20 @@ class dbt(ExtensionBase):
         )
         self.dbt_invoker = Invoker(self.dbt_bin, cwd=self.dbt_project_dir)
 
+    def pre_invoke(self) -> None:
+        """Pre-invoke hook.
+
+        Runs `dbt deps` to ensure dependencies are up-to-date on every invocation.
+        """
+        try:
+            log.info("Extension executing `dbt deps`...")
+            self.dbt_invoker.run_and_log("deps")
+        except subprocess.CalledProcessError as err:
+            log_subprocess_error(
+                "dbt deps", err, "pre invoke step of `dbt deps` failed"
+            )
+            sys.exit(err.returncode)
+
     def invoke(self, command_name: str | None, *command_args: Any) -> None:
         """Invoke the underlying cli, that is being wrapped by this extension.
 
@@ -44,6 +58,10 @@ class dbt(ExtensionBase):
             command_args: The arguments to pass to the command.
         """
         try:
+            command_msg = command_name if command_name else self.dbt_bin
+            if len(command_args) > 0:
+                command_msg += f" {command_args[0][0]}"
+            log.info(f"Extension executing `{command_msg}`...")
             self.dbt_invoker.run_and_log(command_name, *command_args)
         except subprocess.CalledProcessError as err:
             log_subprocess_error(f"dbt {command_name}", err, "dbt invocation failed")
