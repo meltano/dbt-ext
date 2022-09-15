@@ -21,15 +21,25 @@ except ImportError:
 log = structlog.get_logger()
 
 
+class MissingProfileTypeError(Exception):
+    """Missing profile type error."""
+
+    pass
+
+
 class dbt(ExtensionBase):
     """Extension implementing the ExtensionBase interface."""
 
     def __init__(self) -> None:
-        """Initialize the extension."""
+        """Initialize the extension.
+
+        Raises:
+            MissingProfileTypeError: If the profile type is not set.
+        """
         self.dbt_bin = "dbt"
         self.dbt_ext_type = os.getenv("DBT_EXT_TYPE", None)
         if not self.dbt_ext_type:
-            raise Exception("DBT_EXT_TYPE must be set")
+            raise MissingProfileTypeError("DBT_EXT_TYPE must be set")
         self.dbt_project_dir = Path(os.getenv("DBT_EXT_PROJECT_DIR", "transform"))
         self.dbt_profiles_dir = Path(
             os.getenv("DBT_EXT_PROFILES_DIR", self.dbt_project_dir / "transform")

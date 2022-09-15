@@ -4,15 +4,21 @@ Meltano dbt utility extension
 
 ## Configuration
 
+Note the new `DBT_EXT_TYPE` setting, used to indicate what dbt profile should be used, and new default executable of
+`dbt_invoker` instead of `dbt`.
+
 ```yaml
 plugins:
   utilities:
-    - name: dbt-ext
+    - name: dbt-postgres
       label: dbt PostgreSQL extension
-      executable: dbt
+      executable: dbt_invoker
       namespace: dbt_ext
-      pip_url: dbt-core~=1.1.0 dbt-postgres~=1.1.0 -e /Users/syn/projects/dbt-ext
+      pip_url: dbt-core~=1.1.0 dbt-postgres~=1.1.0 git+https://github.com/meltano/git-ext.git@feat/working-dbt-ext
       settings:
+      - name: ext_type
+        env: DBT_EXT_TYPE
+        value: postgres
       - name: project_dir
         label: Projects Directory
         value: $MELTANO_PROJECT_ROOT/transform
@@ -115,4 +121,13 @@ plugins:
         initialize:
           args: initialize
           executable: dbt_extension
+```
+
+## Installation
+
+```bash
+meltano install utility dbt-postgres
+meltano invoke dbt-postgres:initialize
+meltano invoke dbt-postgres list
+meltano invoke dbt-postgres test
 ```
