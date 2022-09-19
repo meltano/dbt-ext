@@ -7,6 +7,8 @@ Meltano dbt utility extension
 Note the new `DBT_EXT_TYPE` setting, used to indicate what dbt profile should be used, and new default executable of
 `dbt_invoker` instead of `dbt`.
 
+### dbt-postgres
+
 ```yaml
 plugins:
   utilities:
@@ -122,6 +124,97 @@ plugins:
           args: initialize
           executable: dbt_extension
 ```
+
+### dbt-snowflake
+
+```yaml
+  - name: dbt-snowflake
+    label: dbt Snowflake
+    executable: dbt_invoker
+    namespace: dbt_ext
+    settings:
+    - name: project_dir
+      label: Projects Directory
+      value: $MELTANO_PROJECT_ROOT/transform
+    - name: profiles_dir
+      label: Profiles Directory
+      env: DBT_PROFILES_DIR
+      value: $MELTANO_PROJECT_ROOT/transform/profiles/snowflake
+    - name: account
+      label: Account
+      kind: string
+      description: The snowflake account to connect to.
+    - name: user
+      label: User
+      kind: string
+      description: The user to connect as.
+    - name: password
+      label: Password
+      kind: password
+      description: The user password to authenticate with.
+    - name: role
+      label: Role
+      kind: string
+      description: The user role to assume.
+    - name: warehouse
+      label: Warehouse
+      kind: string
+      description: The compute warehouse to use when building models.
+    - name: database
+      label: Database
+      kind: string
+      description: The database to create models in.
+    - name: schema
+      label: Schema
+      kind: string
+      description: The schema to build models into by default.
+    commands:
+      clean:
+        args: clean
+        description: Delete all folders in the clean-targets list (usually the dbt_modules
+          and target directories.)
+      compile:
+        args: compile
+        description: Generates executable SQL from source model, test, and analysis files.
+          Compiled SQL files are written to the target/ directory.
+      deps:
+        args: deps
+        description: Pull the most recent version of the dependencies listed in packages.yml
+      run:
+        args: run
+        description: Compile SQL and execute against the current target database.
+      seed:
+        args: seed
+        description: Load data from csv files into your data warehouse.
+      snapshot:
+        args: snapshot
+        description: Execute snapshots defined in your project.
+      test:
+        args: test
+        description: Runs tests on data in deployed models.
+      freshness:
+        args: source freshness
+        description: Check the freshness of your source data.
+      build:
+        args: build
+        description: Will run your models, tests, snapshots and seeds in DAG order.
+      docs-generate:
+        args: docs generate
+        description: Generate documentation for your project.
+      docs-serve:
+        args: docs serve
+        description: Serve documentation for your project. Make sure you ran `docs-generate` first.
+      debug:
+        args: debug
+        description: Debug your DBT project and warehouse connection.
+      describe:
+        args: describe
+        executable: dbt_extension
+      initialize:
+        args: initialize
+        executable: dbt_extension
+```
+
 
 ## Installation
 
