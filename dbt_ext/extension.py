@@ -9,7 +9,6 @@ from pathlib import Path
 from typing import Any
 
 import structlog
-
 from meltano.edk import models
 from meltano.edk.extension import ExtensionBase
 from meltano.edk.process import Invoker, log_subprocess_error
@@ -35,9 +34,7 @@ class dbt(ExtensionBase):
         try:
             self.dbt_invoker.run_and_log(command_name, *command_args)
         except subprocess.CalledProcessError as err:
-            log_subprocess_error(
-                f"dbt {command_name}", err, "dbt invocation failed"
-            )
+            log_subprocess_error(f"dbt {command_name}", err, "dbt invocation failed")
             sys.exit(err.returncode)
 
     def describe(self) -> models.Describe:
