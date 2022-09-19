@@ -132,6 +132,7 @@ plugins:
     label: dbt Snowflake
     executable: dbt_invoker
     namespace: dbt_ext
+    pip_url: dbt-core~=1.1.0 dbt-snowflake~=1.1.0 git+https://github.com/meltano/dbt-ext.git@feat/working-dbt-ext
     settings:
     - name: project_dir
       label: Projects Directory
