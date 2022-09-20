@@ -45,12 +45,36 @@ class dbt(ExtensionBase):
             os.getenv("DBT_EXT_PROFILES_DIR", self.dbt_project_dir / "transform")
         )
         self.dbt_invoker = Invoker(self.dbt_bin, cwd=self.dbt_project_dir)
+        self.skip_pre_invoke = (
+            os.getenv("DBT_EXT_SKIP_PRE_INVOKE", "false").lower() == "false"
+        )
 
-    def pre_invoke(self) -> None:
+    def pre_invoke(self, invoke_name: str | None, *invoke_args: Any) -> None:
         """Pre-invoke hook.
 
         Runs `dbt deps` to ensure dependencies are up-to-date on every invocation.
+
+        Args:
+            invoke_name: The name of the command that will eventually be invoked.
+            invoke_args: The arguments that will be passed to the command.
         """
+        if self.skip_pre_invoke:
+            log.debug("skipping pre-invoke as DBT_EXT_SKIP_PRE_INVOKE is set")
+            return
+
+        if invoke_name in ["deps", "clean"]:
+            log.debug("skipping pre-invoke as command being invoked is deps or clean")
+            return
+
+        try:
+            log.info("Extension executing `dbt clean`...")
+            self.dbt_invoker.run_and_log("clean")
+        except subprocess.CalledProcessError as err:
+            log_subprocess_error(
+                "dbt clean", err, "pre invoke step of `dbt clean` failed"
+            )
+            sys.exit(err.returncode)
+
         try:
             log.info("Extension executing `dbt deps`...")
             self.dbt_invoker.run_and_log("deps")
