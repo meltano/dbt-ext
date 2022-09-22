@@ -18,7 +18,12 @@ plugins:
       namespace: dbt_ext
       pip_url: dbt-core~=1.1.0 dbt-postgres~=1.1.0 git+https://github.com/meltano/dbt-ext.git@feat/working-dbt-ext
       settings:
-      - name: ext_type
+      - name: skip_pre_invoke
+        kind: boolean
+        value: false
+        description: Whether to skip pre-invoke hooks which automatically run dbt clean and deps
+        env: DBT_EXT_SKIP_PRE_INVOKE
+      - name: type
         env: DBT_EXT_TYPE
         value: postgres
       - name: project_dir
@@ -134,6 +139,14 @@ plugins:
     namespace: dbt_ext
     pip_url: dbt-core~=1.1.0 dbt-snowflake~=1.1.0 git+https://github.com/meltano/dbt-ext.git@feat/working-dbt-ext
     settings:
+    - name: skip_pre_invoke
+      kind: boolean
+      value: false
+      description: Whether to skip pre-invoke hooks which automatically run dbt clean and deps
+      env: DBT_EXT_SKIP_PRE_INVOKE
+    - name: type
+      env: DBT_EXT_TYPE
+      value: snowflake
     - name: project_dir
       label: Projects Directory
       value: $MELTANO_PROJECT_ROOT/transform
