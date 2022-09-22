@@ -2,9 +2,9 @@
 import sys
 
 import structlog
+from meltano.edk.logging import pass_through_logging_config
 
 from dbt_ext.extension import dbt
-from meltano.edk.logging import pass_through_logging_config
 
 
 def pass_through_cli() -> None:
@@ -12,6 +12,5 @@ def pass_through_cli() -> None:
     pass_through_logging_config()
     ext = dbt()
     ext.pass_through_invoker(
-        structlog.getLogger("dbt_invoker"),
-        *sys.argv[1:] if len(sys.argv) > 1 else []
+        structlog.getLogger("dbt_invoker"), *sys.argv[1:] if len(sys.argv) > 1 else []
     )
