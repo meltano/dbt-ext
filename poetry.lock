@@ -225,8 +225,8 @@ structlog = "^21.2.0"
 [package.source]
 type = "git"
 url = "https://github.com/meltano/edk.git"
-reference = "feat/pre-post-command-hints"
-resolved_reference = "b97255700dcc556153d68f655265524725f6cd23"
+reference = "main"
+resolved_reference = "5c84bd76bc9095e938b1f47348ffb0c99fe91aed"
 
 [[package]]
 name = "mypy-extensions"
@@ -508,7 +508,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "<3.11,>=3.7"
-content-hash = "d62a8be385a5532f01e372d56f84706fcdbda75bffce0915a2b6363f14a180b4"
+content-hash = "ce1e08c613c8d71bcb229eb74961514db9d0b94e6eaebb8ca2575944258f01a1"
 
 [metadata.files]
 asttokens = [
