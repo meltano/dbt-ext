@@ -46,7 +46,7 @@ class dbt(ExtensionBase):
         )
         self.dbt_invoker = Invoker(self.dbt_bin, cwd=self.dbt_project_dir)
         self.skip_pre_invoke = (
-            os.getenv("DBT_EXT_SKIP_PRE_INVOKE", "false").lower() == "false"
+            os.getenv("DBT_EXT_SKIP_PRE_INVOKE", "false").lower() == "true"
         )
 
     def pre_invoke(self, invoke_name: str | None, *invoke_args: Any) -> None:
