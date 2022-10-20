@@ -1,0 +1,63 @@
+config:
+  send_anonymous_usage_stats: False
+  use_colors: True
+meltano:
+  target: "{{ env_var('MELTANO_ENVIRONMENT', 'dev') }}"
+  outputs:
+    dev:
+      type: redshift
+      method: "{{ env_var('DBT_REDSHIFT_AUTH_METHOD', 'iam')}}"
+      cluster_id: "{{ env_var('DBT_REDSHIFT_CLUSTER_ID') }}"
+      host: "{{ env_var('DBT_REDSHIFT_HOST', '') }}"
+      user: "{{ env_var('DBT_REDSHIFT_USER', '') }}"
+      iam_profile: "{{ env_var('DBT_REDSHIFT_IAM_PROFILE', '') }}"
+      iam_duration_seconds: "{{ env_var('DBT_REDSHIFT_IAM_DURATION_SECONDS', 900) | int }}" # optional
+      autocreate: "{{ env_var('DBT_REDSHIFT_AUTOCREATE', False ) }}" # optional
+      # db_groups: "{{ env_var('DBT_REDSHIFT_DB_GROUPS', '').split() }}" # optional
+      password: "{{ env_var ('DBT_REDSHIFT_PASSWORD', '') }}"
+      port: "{{ env_var('DBT_REDSHIFT_PORT', 5439) | int }}"
+      dbname: "{{ env_var('DBT_REDSHIFT_DBNAME') }}"
+      schema: "{{ env_var('DBT_REDSHIFT_SCHEMA') }}"
+      threads: 2
+      keepalives_idle: "{{ env_var('DBT_REDSHIFT_KEEPALIVES_IDLE', 240) | int }}"
+      search_path: "{{ env_var('DBT_REDSHIFT_SEARCH_PATH', 'public')}}" # optional, but not recommended
+      # sslmode: "{{ env_var('DBT_REDSHIFT_SSLMODE', '').split() }}" # optional, set the sslmode used to connect to the database
+      ra3_node: "{{ env_var('DBT_REDSHIFT_RA3_NODE', False ) }}" # optional, enables cross-database sources
+    staging:
+      type: redshift
+      method: "{{ env_var('DBT_REDSHIFT_AUTH_METHOD', 'iam')}}"
+      cluster_id: "{{ env_var('DBT_REDSHIFT_CLUSTER_ID') }}"
+      host: "{{ env_var('DBT_REDSHIFT_HOST', '') }}"
+      user: "{{ env_var('DBT_REDSHIFT_USER', '') }}"
+      iam_profile: "{{ env_var('DBT_REDSHIFT_IAM_PROFILE', '') }}"
+      iam_duration_seconds: "{{ env_var('DBT_REDSHIFT_IAM_DURATION_SECONDS', '') }}" # optional
+      autocreate: "{{ env_var('DBT_REDSHIFT_AUTOCREATE', '') }}" # optional
+      # db_groups: "{{ env_var('DBT_REDSHIFT_DB_GROUPS', '').split() }}" # optional
+      password: "{{ env_var ('DBT_REDSHIFT_PASSWORD', '') }}"
+      port: "{{ env_var('DBT_REDSHIFT_PORT', 5439) | int }}"
+      dbname: "{{ env_var('DBT_REDSHIFT_DBNAME') }}"
+      schema: "{{ env_var('DBT_REDSHIFT_SCHEMA') }}"
+      threads: 2
+      keepalives_idle: "{{ env_var('DBT_REDSHIFT_KEEPALIVES_IDLE', 240) | int }}"
+      search_path: "{{ env_var('DBT_REDSHIFT_SEARCH_PATH', 'public')}}" # optional, but not recommended
+      # sslmode: "{{ env_var('DBT_REDSHIFT_SSLMODE', '').split() }}" # optional, set the sslmode used to connect to the database
+      ra3_node: "{{ env_var('DBT_REDSHIFT_RA3_NODE', '') }}" # optional, enables cross-database sources
+    prod:
+      type: redshift
+      method: "{{ env_var('DBT_REDSHIFT_AUTH_METHOD', 'iam')}}"
+      cluster_id: "{{ env_var('DBT_REDSHIFT_CLUSTER_ID') }}"
+      host: "{{ env_var('DBT_REDSHIFT_HOST', '') }}"
+      user: "{{ env_var('DBT_REDSHIFT_USER', '') }}"
+      iam_profile: "{{ env_var('DBT_REDSHIFT_IAM_PROFILE', '') }}"
+      iam_duration_seconds: "{{ env_var('DBT_REDSHIFT_IAM_DURATION_SECONDS', '') }}" # optional
+      autocreate: "{{ env_var('DBT_REDSHIFT_AUTOCREATE', '') }}" # optional
+      # db_groups: "{{ env_var('DBT_REDSHIFT_DB_GROUPS', '').split() }}" # optional
+      password: "{{ env_var ('DBT_REDSHIFT_PASSWORD', '') }}"
+      port: "{{ env_var('DBT_REDSHIFT_PORT', 5439) | int }}"
+      dbname: "{{ env_var('DBT_REDSHIFT_DBNAME') }}"
+      schema: "{{ env_var('DBT_REDSHIFT_SCHEMA') }}"
+      threads: 2
+      keepalives_idle: "{{ env_var('DBT_REDSHIFT_KEEPALIVES_IDLE', 240) | int }}"
+      search_path: "{{ env_var('DBT_REDSHIFT_SEARCH_PATH', 'public')}}" # optional, but not recommended
+      # sslmode: "{{ env_var('DBT_REDSHIFT_SSLMODE', '').split() }}" # optional, set the sslmode used to connect to the database
+      ra3_node: "{{ env_var('DBT_REDSHIFT_RA3_NODE', '') }}" # optional, enables cross-database sources
