@@ -59,7 +59,7 @@ class dbt(ExtensionBase):
             invoke_args: The arguments that will be passed to the command.
         """
         if self.skip_pre_invoke:
-            log.debug("skipping pre-invoke as DBT_SKIP_PRE_INVOKE is set")
+            log.debug("skipping pre-invoke as DBT_EXT_SKIP_PRE_INVOKE is set")
             return
 
         if invoke_name in ["deps", "clean"]:
