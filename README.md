@@ -22,7 +22,7 @@ plugins:
         kind: boolean
         value: false
         description: Whether to skip pre-invoke hooks which automatically run dbt clean and deps
-        env: DBT_SKIP_PRE_INVOKE
+        env: DBT_EXT_SKIP_PRE_INVOKE
       - name: type
         env: DBT_EXT_TYPE
         value: postgres
@@ -143,7 +143,7 @@ plugins:
       kind: boolean
       value: false
       description: Whether to skip pre-invoke hooks which automatically run dbt clean and deps
-      env: DBT_SKIP_PRE_INVOKE
+      env: DBT_EXT_SKIP_PRE_INVOKE
     - name: type
       env: DBT_EXT_TYPE
       value: snowflake
