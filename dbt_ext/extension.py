@@ -42,7 +42,7 @@ class dbt(ExtensionBase):
             raise MissingProfileTypeError("DBT_EXT_TYPE must be set")
         self.dbt_project_dir = Path(os.getenv("DBT_PROJECT_DIR", "transform"))
         self.dbt_profiles_dir = Path(
-            os.getenv("DBT_PROFILES_DIR", self.dbt_project_dir / "transform")
+            os.getenv("DBT_PROFILES_DIR", self.dbt_project_dir / "profiles")
         )
         self.dbt_invoker = Invoker(self.dbt_bin, cwd=self.dbt_project_dir)
         self.skip_pre_invoke = (
