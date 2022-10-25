@@ -40,13 +40,13 @@ class dbt(ExtensionBase):
         self.dbt_ext_type = os.getenv("DBT_EXT_TYPE", None)
         if not self.dbt_ext_type:
             raise MissingProfileTypeError("DBT_EXT_TYPE must be set")
-        self.dbt_project_dir = Path(os.getenv("DBT_EXT_PROJECT_DIR", "transform"))
+        self.dbt_project_dir = Path(os.getenv("DBT_PROJECT_DIR", "transform"))
         self.dbt_profiles_dir = Path(
-            os.getenv("DBT_EXT_PROFILES_DIR", self.dbt_project_dir / "transform")
+            os.getenv("DBT_PROFILES_DIR", self.dbt_project_dir / "transform")
         )
         self.dbt_invoker = Invoker(self.dbt_bin, cwd=self.dbt_project_dir)
         self.skip_pre_invoke = (
-            os.getenv("DBT_EXT_SKIP_PRE_INVOKE", "false").lower() == "true"
+            os.getenv("DBT_SKIP_PRE_INVOKE", "false").lower() == "true"
         )
 
     def pre_invoke(self, invoke_name: str | None, *invoke_args: Any) -> None:
@@ -59,7 +59,7 @@ class dbt(ExtensionBase):
             invoke_args: The arguments that will be passed to the command.
         """
         if self.skip_pre_invoke:
-            log.debug("skipping pre-invoke as DBT_EXT_SKIP_PRE_INVOKE is set")
+            log.debug("skipping pre-invoke as DBT_SKIP_PRE_INVOKE is set")
             return
 
         if invoke_name in ["deps", "clean"]:
