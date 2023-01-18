@@ -6,12 +6,12 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any
 
 import structlog
 from meltano.edk import models
 from meltano.edk.extension import ExtensionBase
 from meltano.edk.process import Invoker, log_subprocess_error
+from meltano.edk.types import ExecArg
 
 try:
     from importlib.resources import files as ir_files
@@ -49,7 +49,7 @@ class dbt(ExtensionBase):
             os.getenv("DBT_EXT_SKIP_PRE_INVOKE", "false").lower() == "true"
         )
 
-    def pre_invoke(self, invoke_name: str | None, *invoke_args: Any) -> None:
+    def pre_invoke(self, invoke_name: str | None, *invoke_args: ExecArg) -> None:
         """Pre-invoke hook.
 
         Runs `dbt deps` to ensure dependencies are up-to-date on every invocation.
@@ -84,7 +84,7 @@ class dbt(ExtensionBase):
             )
             sys.exit(err.returncode)
 
-    def invoke(self, command_name: str | None, *command_args: Any) -> None:
+    def invoke(self, command_name: str | None, *command_args: ExecArg) -> None:
         """Invoke the underlying cli, that is being wrapped by this extension.
 
         Args:
@@ -94,7 +94,7 @@ class dbt(ExtensionBase):
         try:
             command_msg = command_name if command_name else self.dbt_bin
             if len(command_args) > 0:
-                command_msg += f" {command_args[0][0]}"
+                command_msg += f" {command_args[0]}"
             log.info(f"Extension executing `{command_msg}`...")
             self.dbt_invoker.run_and_log(command_name, *command_args)
         except subprocess.CalledProcessError as err:
