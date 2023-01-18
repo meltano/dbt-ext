@@ -328,8 +328,8 @@ docs = ["myst-parser (>=0.17.2,<0.19.0)", "sphinx (>=4.5,<6.0)", "sphinx-autobui
 [package.source]
 type = "git"
 url = "https://github.com/meltano/edk.git"
-reference = "main"
-resolved_reference = "e5c3aa5fc23f61d153baaa1ae6ea9b572170eadc"
+reference = "v0.1.0"
+resolved_reference = "b194cb5b96e99c872e936dd76c62a9f32f17a5e7"
 
 [[package]]
 name = "mypy-extensions"
@@ -754,4 +754,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "<3.12,>=3.7"
-content-hash = "40d6448573d0e678f8ee85f68a6f01a4e58cff6acd157317f27ae108137a010d"
+content-hash = "7b3e6580e53fbf40f7471ea252b71f5f78de658efe8dce4bef9d2790af0f8fc9"
