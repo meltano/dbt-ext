@@ -30,7 +30,7 @@ meltano:
       host: "{{ env_var('DBT_REDSHIFT_HOST', '') }}"
       user: "{{ env_var('DBT_REDSHIFT_USER', '') }}"
       iam_profile: "{{ env_var('DBT_REDSHIFT_IAM_PROFILE', '') }}"
-      iam_duration_seconds: "{{ env_var('DBT_REDSHIFT_IAM_DURATION_SECONDS', '') }}" # optional
+      iam_duration_seconds: "{{ env_var('DBT_REDSHIFT_IAM_DURATION_SECONDS', 900) | int }}" # optional
       autocreate: "{{ env_var('DBT_REDSHIFT_AUTOCREATE', '') }}" # optional
       # db_groups: "{{ env_var('DBT_REDSHIFT_DB_GROUPS', '').split() }}" # optional
       password: "{{ env_var ('DBT_REDSHIFT_PASSWORD', '') }}"
@@ -49,7 +49,7 @@ meltano:
       host: "{{ env_var('DBT_REDSHIFT_HOST', '') }}"
       user: "{{ env_var('DBT_REDSHIFT_USER', '') }}"
       iam_profile: "{{ env_var('DBT_REDSHIFT_IAM_PROFILE', '') }}"
-      iam_duration_seconds: "{{ env_var('DBT_REDSHIFT_IAM_DURATION_SECONDS', '') }}" # optional
+      iam_duration_seconds: "{{ env_var('DBT_REDSHIFT_IAM_DURATION_SECONDS', 900) | int }}" # optional
       autocreate: "{{ env_var('DBT_REDSHIFT_AUTOCREATE', '') }}" # optional
       # db_groups: "{{ env_var('DBT_REDSHIFT_DB_GROUPS', '').split() }}" # optional
       password: "{{ env_var ('DBT_REDSHIFT_PASSWORD', '') }}"
