@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dbt-ext"
-version = "0.0.1"
+version = "0.1.0"
 description = "`dbt-ext` is a Meltano utility extension."
 authors = ["Meltano Team and Contributors"]
 maintainers = ["Meltano Team and Contributors"]
