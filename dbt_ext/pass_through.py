@@ -1,4 +1,5 @@
 """Passthrough shim for dbt extension."""
+
 import sys
 
 import structlog
