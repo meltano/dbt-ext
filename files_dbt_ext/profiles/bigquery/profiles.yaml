@@ -17,7 +17,7 @@ meltano:
       keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE', '') }}"
     staging:
       type: bigquery
-      method: "{{ env_var('DBT_BIGQUERY_METHOD') }}"
+      method: "{{ env_var('DBT_BIGQUERY_AUTH_METHOD') }}"
       project: "{{ env_var('DBT_BIGQUERY_PROJECT') }}"
       dataset: "{{ env_var('DBT_BIGQUERY_DATASET') }}"
       threads: 4
@@ -28,7 +28,7 @@ meltano:
       keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE', '') }}"
     prod:
       type: bigquery
-      method: "{{ env_var('DBT_BIGQUERY_METHOD') }}"
+      method: "{{ env_var('DBT_BIGQUERY_AUTH_METHOD') }}"
       project: "{{ env_var('DBT_BIGQUERY_PROJECT') }}"
       dataset: "{{ env_var('DBT_BIGQUERY_DATASET') }}"
       threads: 6
