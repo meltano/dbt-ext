@@ -1,0 +1,35 @@
+# Athena config reference: https://github.com/dbt-athena/dbt-athena?tab=readme-ov-file#configuring-your-profile
+#
+# Warning: Do not store credentials in this file unless you've take the necessary steps to remove
+# this file from your git commit.
+config:
+  send_anonymous_usage_stats: False
+  use_colors: True
+meltano:
+  target: "{{ env_var('MELTANO_ENVIRONMENT', 'dev') }}"  # The default profile name if no other profile is selected.
+  outputs:
+    # TODO: Optionally, revise or add to these profiles to reflect your own environments. Meltano adds dev, staging and prod by default.
+    dev:
+      type: athena
+      s3_staging_dir: "{{ env_var('DBT_ATHENA_S3_STAGING_DIR') }}"
+      s3_data_dir: "{{ env_var('DBT_ATHENA_S3_DATA_DIR') }}"
+      region_name: "{{ env_var('DBT_ATHENA_REGION_NAME') }}"
+      schema: "{{ env_var('DBT_ATHENA_SCHEMA') }}"
+      database: "{{ env_var('DBT_ATHENA_DATABASE') }}"
+      work_group: "{{ env_var('DBT_ATHENA_WORK_GROUP') }}"
+    staging:
+      type: athena
+      s3_staging_dir: "{{ env_var('DBT_ATHENA_S3_STAGING_DIR') }}"
+      s3_data_dir: "{{ env_var('DBT_ATHENA_S3_DATA_DIR') }}"
+      region_name: "{{ env_var('DBT_ATHENA_REGION_NAME') }}"
+      schema: "{{ env_var('DBT_ATHENA_SCHEMA') }}"
+      database: "{{ env_var('DBT_ATHENA_DATABASE') }}"
+      work_group: "{{ env_var('DBT_ATHENA_WORK_GROUP') }}"
+    prod:
+      type: athena
+      s3_staging_dir: "{{ env_var('DBT_ATHENA_S3_STAGING_DIR') }}"
+      s3_data_dir: "{{ env_var('DBT_ATHENA_S3_DATA_DIR') }}"
+      region_name: "{{ env_var('DBT_ATHENA_REGION_NAME') }}"
+      schema: "{{ env_var('DBT_ATHENA_SCHEMA') }}"
+      database: "{{ env_var('DBT_ATHENA_DATABASE') }}"
+      work_group: "{{ env_var('DBT_ATHENA_WORK_GROUP') }}"
