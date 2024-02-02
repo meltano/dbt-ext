@@ -19,7 +19,7 @@ target-path: ../.meltano/transformers/dbt/target
 log-path: logs
 packages-install-path: dbt_packages
 clean-targets:
-- ../.meltano/transformers/dbt/target
+- .meltano/transformers/dbt/target
 - dbt_packages
 - logs
 models:
