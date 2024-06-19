@@ -23,6 +23,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
@@ -31,6 +33,7 @@ jobs:
       - name: Install Poetry
         run: |
           pipx install poetry
+          pipx inject poetry poetry-dynamic-versioning
           poetry --version
       - name: Install dependencies
         run: |

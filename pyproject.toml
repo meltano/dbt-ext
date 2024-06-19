@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dbt-ext"
-version = "0.1.0"
+version = "0.0.0"
 description = "`dbt-ext` is a Meltano utility extension."
 authors = ["Meltano Team and Contributors"]
 maintainers = ["Meltano Team and Contributors"]
@@ -38,9 +38,12 @@ pre-commit = "^2.20.0"
 pytest = "^7.1.3"
 
 [build-system]
-requires = ["poetry-core==1.9.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core==1.9.0", "poetry-dynamic-versioning==1.4.0"]
+build-backend = "poetry_dynamic_versioning.backend"
 
 [tool.poetry.scripts]
 dbt_extension = 'dbt_ext.main:app'
 dbt_invoker = 'dbt_ext.pass_through:pass_through_cli'
+
+[tool.poetry-dynamic-versioning]
+enable = true
