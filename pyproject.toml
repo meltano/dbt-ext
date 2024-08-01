@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "dbt-ext"
+name = "meltano-dbt-ext"
 version = "0.0.0"
-description = "`dbt-ext` is a Meltano utility extension."
-authors = ["Meltano Team and Contributors"]
-maintainers = ["Meltano Team and Contributors"]
+description = "A Meltano utility extension to manage dbt projects."
+authors = ["Meltano Team and Contributors <hello@meltano.com>"]
+maintainers = ["Meltano Team and Contributors <hello@meltano.com>"]
 readme = "README.md"
 homepage = "https://meltano.com"
 repository = "https://github.com/meltano/dbt-ext"
