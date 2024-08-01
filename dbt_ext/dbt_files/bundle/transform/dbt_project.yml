@@ -3,6 +3,9 @@ version: '1.0'
 profile: meltano
 config-version: 2
 require-dbt-version: [">=1.0.0", "<2.0.0"]
+flags:
+  send_anonymous_usage_stats: False
+  use_colors: True
 model-paths:
 - models
 analysis-paths:
