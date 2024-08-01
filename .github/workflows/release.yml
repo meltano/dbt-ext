@@ -19,7 +19,7 @@ jobs:
     needs: [build]
     environment:
       name: pypi
-      url: https://pypi.org/p/dbt-ext
+      url: https://pypi.org/p/meltano-dbt-ext
     if: startsWith(github.ref, 'refs/tags/')
     permissions:
       id-token: write  # Needed for OIDC PyPI publishing
