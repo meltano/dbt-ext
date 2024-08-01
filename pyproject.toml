@@ -11,7 +11,6 @@ license = "Apache-2.0"
 
 packages = [
     { include = "dbt_ext" },
-    { include = "files_dbt_ext" },
 ]
 
 # If you need to static assets with your extension, you can add them here.

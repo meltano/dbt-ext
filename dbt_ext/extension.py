@@ -14,10 +14,12 @@ from meltano.edk.extension import ExtensionBase
 from meltano.edk.process import Invoker, log_subprocess_error
 from meltano.edk.types import ExecArg
 
+from . import dbt_files
+
 try:
-    from importlib.resources import files as ir_files
+    from importlib import resources
 except ImportError:
-    from importlib_resources import files as ir_files
+    import importlib_resources as resources
 
 log = structlog.get_logger()
 
@@ -130,7 +132,9 @@ class dbt(ExtensionBase):
             log.info("creating dbt project directory", path=self.dbt_project_dir)
             self.dbt_project_dir.mkdir(parents=True, exist_ok=True)
 
-        for entry in ir_files("files_dbt_ext.bundle.transform").iterdir():
+        files_dir = resources.files(dbt_files)
+
+        for entry in files_dir.joinpath("bundle", "transform").iterdir():
             if entry.name == "__pycache__":
                 continue
             log.debug(f"deploying {entry.name}", entry=entry, dst=self.dbt_project_dir)
@@ -145,7 +149,7 @@ class dbt(ExtensionBase):
             log.info("creating dbt profiles directory", path=self.dbt_profiles_dir)
             self.dbt_profiles_dir.mkdir(parents=True, exist_ok=True)
 
-        for entry in ir_files("files_dbt_ext.profiles").iterdir():
+        for entry in files_dir.joinpath("profiles").iterdir():
             if entry.name == self.dbt_ext_type and entry.is_dir():
                 log.debug(
                     f"deploying {entry.name} profile",
