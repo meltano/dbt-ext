@@ -49,14 +49,14 @@ jobs:
     - name: Upload wheel and sdist to release
       uses: svenstaro/upload-release-action@v2
       with:
-        file: dist/edk*
+        file: dist/dbt_ext*
         tag: ${{ github.ref }}
         overwrite: true
         file_glob: true
     - uses: actions/attest-build-provenance@v1
       id: attest
       with:
-        subject-path: "./dist/edk*"
+        subject-path: "./dist/dbt_ext*"
     - name: Upload attestations to release
       uses: svenstaro/upload-release-action@v2
       with:
