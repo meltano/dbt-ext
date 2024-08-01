@@ -2,9 +2,6 @@
 #
 # Warning: Do not store credentials in this file unless you've take the necessary steps to remove
 # this file from your git commit.
-config:
-  send_anonymous_usage_stats: False
-  use_colors: True
 meltano:
   target: "{{ env_var('MELTANO_ENVIRONMENT', 'dev') }}"  # The default profile name if no other profile is selected.
   outputs:
