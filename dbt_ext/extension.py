@@ -14,7 +14,7 @@ from meltano.edk.extension import ExtensionBase
 from meltano.edk.process import Invoker, log_subprocess_error
 from meltano.edk.types import ExecArg
 
-from . import files
+from . import dbt_files
 
 try:
     from importlib import resources
@@ -132,7 +132,7 @@ class dbt(ExtensionBase):
             log.info("creating dbt project directory", path=self.dbt_project_dir)
             self.dbt_project_dir.mkdir(parents=True, exist_ok=True)
 
-        files_dir = resources.files(files)
+        files_dir = resources.files(dbt_files)
 
         for entry in files_dir.joinpath("bundle", "transform").iterdir():
             if entry.name == "__pycache__":
