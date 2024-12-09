@@ -55,7 +55,7 @@ jobs:
         tag: ${{ github.ref }}
         overwrite: true
         file_glob: true
-    - uses: actions/attest-build-provenance@v1
+    - uses: actions/attest-build-provenance@v2
       id: attest
       with:
         subject-path: "./dist/meltano_dbt_ext*"
