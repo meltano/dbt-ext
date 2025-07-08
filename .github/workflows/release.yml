@@ -49,7 +49,7 @@ jobs:
         name: Packages
         path: dist
     - name: Upload wheel and sdist to release
-      uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # 2.9.0
+      uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13 # 2.11.2
       with:
         file: dist/meltano_dbt_ext*
         tag: ${{ github.ref }}
@@ -60,7 +60,7 @@ jobs:
       with:
         subject-path: "./dist/meltano_dbt_ext*"
     - name: Upload attestations to release
-      uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # 2.9.0
+      uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13 # 2.11.2
       with:
         file: ${{ steps.attest.outputs.bundle-path }}
         tag: ${{ github.ref }}
