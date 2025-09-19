@@ -1,8 +1,9 @@
 """dbt cli entrypoint."""
 
+from __future__ import annotations
+
 import os
 import sys
-from typing import List
 
 import structlog
 import typer
@@ -42,7 +43,7 @@ def initialize(
 @app.command(
     context_settings={"allow_extra_args": True, "ignore_unknown_options": True}
 )
-def invoke(ctx: typer.Context, command_args: List[str]) -> None:
+def invoke(ctx: typer.Context, command_args: list[str]) -> None:
     """Invoke the plugin.
 
     Note: that if a command argument is a list, such as command_args,
@@ -60,7 +61,7 @@ def invoke(ctx: typer.Context, command_args: List[str]) -> None:
 def describe(
     output_format: DescribeFormat = typer.Option(
         DescribeFormat.text, "--format", help="Output format"
-    )
+    ),
 ) -> None:
     """Describe the available commands of this extension."""
     try:

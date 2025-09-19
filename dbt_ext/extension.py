@@ -6,6 +6,7 @@ import os
 import shutil
 import subprocess
 import sys
+from importlib import resources
 from pathlib import Path
 
 import structlog
@@ -16,10 +17,6 @@ from meltano.edk.types import ExecArg
 
 from . import dbt_files
 
-try:
-    from importlib import resources
-except ImportError:
-    import importlib_resources as resources
 
 log = structlog.get_logger()
 
