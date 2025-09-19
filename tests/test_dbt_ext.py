@@ -1,18 +1,20 @@
 from unittest.mock import patch
 
+import pytest
 
-def test_app_name(monkeypatch):
+from dbt_ext.main import dbt
+
+
+def test_app_name(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("DBT_EXT_TYPE", "test")
     from dbt_ext.main import app
 
     assert app.info.name == "dbt"
 
 
-def test_pre_invoke(monkeypatch):
+def test_pre_invoke(monkeypatch: pytest.MonkeyPatch) -> None:
     """Verify that pre-invokes are skipped for deps and clean."""
     monkeypatch.setenv("DBT_EXT_TYPE", "test")
-    from dbt_ext.main import dbt
-
     dbt_ext = dbt()
 
     dbt_ext.skip_pre_invoke = True

@@ -18,29 +18,9 @@ repos:
             .bumpversion.cfg
         )$
 
-- repo: https://github.com/psf/black
-  rev: 25.1.0
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.13.1
   hooks:
-  - id: black
-
-- repo: https://github.com/pycqa/isort
-  rev: 6.0.1
-  hooks:
-  - id: isort
-
-- repo: https://github.com/pycqa/flake8
-  rev: 7.3.0
-  hooks:
-  - id: flake8
-    additional_dependencies:
-    - darglint==1.8.1
-    - flake8-annotations==2.9.0
-    - flake8-docstrings==1.6.0
-    exclude: 'files_dbt_ext'
-
-- repo: https://github.com/asottile/pyupgrade
-  rev: v3.20.0
-  hooks:
-  - id: pyupgrade
-    args: [--py37-plus]
-    exclude: 'files_dbt_ext'
+  - id: ruff-check
+    args: [ --fix ]
+  - id: ruff-format
