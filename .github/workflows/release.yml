@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       with:
         fetch-depth: 0
-    - uses: hynek/build-and-inspect-python-package@b5076c307dc91924a82ad150cdd1533b444d3310 # v2.12.0
+    - uses: hynek/build-and-inspect-python-package@c52c3a4710070b50470d903818a7b25115dcd076 # v2.13.0
 
   publish:
     name: Publish to PyPI
@@ -49,18 +49,18 @@ jobs:
         name: Packages
         path: dist
     - name: Upload wheel and sdist to release
-      uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # 2.9.0
+      uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13 # 2.11.2
       with:
         file: dist/meltano_dbt_ext*
         tag: ${{ github.ref }}
         overwrite: true
         file_glob: true
-    - uses: actions/attest-build-provenance@db473fddc028af60658334401dc6fa3ffd8669fd # v2.3.0
+    - uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3.0.0
       id: attest
       with:
         subject-path: "./dist/meltano_dbt_ext*"
     - name: Upload attestations to release
-      uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # 2.9.0
+      uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13 # 2.11.2
       with:
         file: ${{ steps.attest.outputs.bundle-path }}
         tag: ${{ github.ref }}
