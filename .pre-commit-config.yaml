@@ -11,16 +11,16 @@ repos:
   - id: check-toml
   - id: check-yaml
   - id: end-of-file-fixer
-    exclude: (docs/.*|samples/.*\.json)
   - id: trailing-whitespace
-    exclude: |
-        (?x)^(
-            .bumpversion.cfg
-        )$
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.14.10
+  rev: v0.15.0
   hooks:
   - id: ruff-check
-    args: [ --fix ]
   - id: ruff-format
+
+- repo: https://github.com/python-jsonschema/check-jsonschema
+  rev: 0.36.1
+  hooks:
+  - id: check-dependabot
+  - id: check-github-workflows
