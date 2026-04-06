@@ -14,13 +14,13 @@ repos:
   - id: trailing-whitespace
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.15.0
+  rev: v0.15.9
   hooks:
   - id: ruff-check
   - id: ruff-format
 
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.36.1
+  rev: 0.37.1
   hooks:
   - id: check-dependabot
   - id: check-github-workflows
