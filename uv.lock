@@ -174,7 +174,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "click", specifier = ">=8.3.0,<8.4.0" },
-    { name = "meltano-edk", specifier = "~=0.5.0" },
+    { name = "meltano-edk", specifier = ">=0.5,<0.7" },
     { name = "pyyaml", specifier = ">=6.0.0" },
     { name = "typer", specifier = ">=0.18.0,<0.25.0" },
 ]
@@ -188,7 +188,7 @@ dev = [
 
 [[package]]
 name = "meltano-edk"
-version = "0.5.0"
+version = "0.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "devtools" },
@@ -196,9 +196,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "structlog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/35/99/68f6d1c5c1b248bb499f0ac5f33a1d23331478b522cf5dd5a96522b0abe9/meltano_edk-0.5.0.tar.gz", hash = "sha256:daa76ffa094cc278044f660fb5eccb5a74960e83f0ba7fc94dc5f987b7db3dc9", size = 12034, upload-time = "2025-01-13T18:31:55.783Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e2/aa/cc3b3d20ccefdf4357fd7a3436e367dbc48a35414962ef4bbe078a20e8e9/meltano_edk-0.6.0.tar.gz", hash = "sha256:ca3b756bae5b220c6969666cdabc5df374f835bf50946f0a3ddc1f11abe26b2e", size = 11985, upload-time = "2026-04-22T16:52:39.815Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2c/51/652db8c099ab1d03a99a6a411392451f8e2fbc7745d6f8ec4b8b13ec0098/meltano_edk-0.5.0-py3-none-any.whl", hash = "sha256:fbb45da002265e2bf584e2002af25f33a9744c1215ad417a744ff146d42e75a8", size = 12871, upload-time = "2025-01-13T18:31:53.373Z" },
+    { url = "https://files.pythonhosted.org/packages/b8/35/a998a2722172ff7e6aa07717abea115bfb74e8c46581ff78a41487f71519/meltano_edk-0.6.0-py3-none-any.whl", hash = "sha256:1e1a9dcf834a0a0cc2501218fd6c7f563ee1f1c8b63def6347a026c986c2496a", size = 12842, upload-time = "2026-04-22T16:52:38.573Z" },
 ]
 
 [[package]]
