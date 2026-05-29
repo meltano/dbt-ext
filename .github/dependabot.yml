@@ -5,8 +5,12 @@ updates:
     schedule:
       interval: monthly
     labels: [deps]
+    cooldown:
+      default-days: 7
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: quarterly
     labels: [deps]
+    cooldown:
+      default-days: 7
