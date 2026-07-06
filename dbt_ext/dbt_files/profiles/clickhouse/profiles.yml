@@ -1,0 +1,37 @@
+# ClickHouse config reference: https://github.com/ClickHouse/dbt-clickhouse
+meltano:
+  target: "{{ env_var('MELTANO_ENVIRONMENT', 'dev') }}"
+  outputs:
+    dev:
+      type: clickhouse
+      host: "{{ env_var('DBT_CLICKHOUSE_HOST') }}"
+      port: "{{ env_var('DBT_CLICKHOUSE_PORT') | int }}"
+      user: "{{ env_var('DBT_CLICKHOUSE_USER') }}"
+      password: "{{ env_var('DBT_CLICKHOUSE_PASSWORD') }}"
+      schema: "{{ env_var('DBT_CLICKHOUSE_SCHEMA') }}"
+      threads: 2
+      connect_timeout: 10
+      send_receive_timeout: 300
+      retries: 1
+    staging:
+      type: clickhouse
+      host: "{{ env_var('DBT_CLICKHOUSE_HOST') }}"
+      port: "{{ env_var('DBT_CLICKHOUSE_PORT') | int }}"
+      user: "{{ env_var('DBT_CLICKHOUSE_USER') }}"
+      password: "{{ env_var('DBT_CLICKHOUSE_PASSWORD') }}"
+      schema: "{{ env_var('DBT_CLICKHOUSE_SCHEMA') }}"
+      threads: 4
+      connect_timeout: 10
+      send_receive_timeout: 300
+      retries: 1
+    prod:
+      type: clickhouse
+      host: "{{ env_var('DBT_CLICKHOUSE_HOST') }}"
+      port: "{{ env_var('DBT_CLICKHOUSE_PORT') | int }}"
+      user: "{{ env_var('DBT_CLICKHOUSE_USER') }}"
+      password: "{{ env_var('DBT_CLICKHOUSE_PASSWORD') }}"
+      schema: "{{ env_var('DBT_CLICKHOUSE_SCHEMA') }}"
+      threads: 6
+      connect_timeout: 10
+      send_receive_timeout: 300
+      retries: 1
