@@ -9,7 +9,7 @@ license = "Apache-2.0"
 maintainers = [{ name = "Meltano Team and Contributors", email = "hello@meltano.com" }]
 dependencies = [
     "PyYAML>=6.0.0",
-    "typer~=0.26.0",
+    "typer>=0.26,<0.28",
     "meltano.edk>=0.5,<0.7",
 ]
 
