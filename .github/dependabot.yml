@@ -9,6 +9,7 @@ updates:
       development-dependencies:
         dependency-type: "development"
     allow:
+      - dependency-type: "all"
     cooldown:
       default-days: 7
   - package-ecosystem: github-actions
