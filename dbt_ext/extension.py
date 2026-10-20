@@ -17,14 +17,11 @@ from meltano.edk.types import ExecArg
 
 from . import dbt_files
 
-
 log = structlog.get_logger()
 
 
 class MissingProfileTypeError(Exception):
     """Missing profile type error."""
-
-    pass
 
 
 class dbt(ExtensionBase):

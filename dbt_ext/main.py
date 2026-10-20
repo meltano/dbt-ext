@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import sys
+from typing import Annotated
 
 import structlog
 import typer
@@ -59,9 +60,9 @@ def invoke(ctx: typer.Context, command_args: list[str]) -> None:
 
 @app.command()
 def describe(
-    output_format: DescribeFormat = typer.Option(
-        DescribeFormat.text, "--format", help="Output format"
-    ),
+    output_format: Annotated[
+        DescribeFormat, typer.Option("--format", help="Output format")
+    ] = DescribeFormat.text,
 ) -> None:
     """Describe the available commands of this extension."""
     try:
